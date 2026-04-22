@@ -1,0 +1,17 @@
+{
+	"slug": "uptime-kuma",
+	"name": "Uptime Kuma",
+	"description": "Self-hosted monitoring tool like Uptime Robot",
+	"icon": "📡",
+	"category": "monitoring",
+	"services": [
+		{
+			"name": "uptime-kuma",
+			"image": "louislam/uptime-kuma:latest",
+			"port": 3001,
+			"volumes": [{ "name": "data", "mountPath": "/app/data", "size": "5Gi" }],
+			"environment": {}
+		}
+	],
+	"form": []
+}

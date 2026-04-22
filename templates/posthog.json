@@ -1,0 +1,76 @@
+{
+	"slug": "posthog",
+	"name": "PostHog",
+	"description": "Product analytics, feature flags, session replay",
+	"icon": "🦔",
+	"category": "analytics",
+	"services": [
+		{
+			"name": "posthog",
+			"image": "posthog/posthog:latest",
+			"port": 8000,
+			"environment": {
+				"SECRET_KEY": "{{SECRET_KEY|generate:password:24}}",
+				"DATABASE_URL": "postgres://{{POSTGRES_USER|default:posthog}}:{{POSTGRES_PASSWORD|generate:password:24}}@postgresql:5432/{{POSTGRES_DB|default:posthog}}",
+				"REDIS_URL": "redis://redis:6379",
+				"SITE_URL": "{{SITE_URL|default:http://localhost:8000}}",
+				"IS_BEHIND_PROXY": "true"
+			}
+		},
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "pg-data", "mountPath": "/var/lib/postgresql/data", "size": "20Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{POSTGRES_USER|default:posthog}}",
+				"POSTGRES_PASSWORD": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{POSTGRES_DB|default:posthog}}"
+			}
+		},
+		{
+			"name": "redis",
+			"image": "redis:7-alpine",
+			"port": 6379,
+			"volumes": [{ "name": "redis-data", "mountPath": "/data", "size": "2Gi" }],
+			"environment": {}
+		}
+	],
+	"form": [
+		{
+			"key": "SITE_URL",
+			"label": "Site URL",
+			"type": "text",
+			"default": "http://localhost:8000",
+			"required": true
+		},
+		{
+			"key": "SECRET_KEY",
+			"label": "Secret Key",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "posthog",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_DB",
+			"label": "Database Name",
+			"type": "text",
+			"default": "posthog",
+			"required": true
+		}
+	]
+}

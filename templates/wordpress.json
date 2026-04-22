@@ -1,0 +1,63 @@
+{
+	"slug": "wordpress",
+	"name": "WordPress",
+	"description": "The most popular CMS powering 40% of the web",
+	"icon": "📝",
+	"category": "cms",
+	"services": [
+		{
+			"name": "wordpress",
+			"image": "wordpress:latest",
+			"port": 80,
+			"volumes": [{ "name": "wp-content", "mountPath": "/var/www/html", "size": "10Gi" }],
+			"environment": {
+				"WORDPRESS_DB_HOST": "mysql:3306",
+				"WORDPRESS_DB_USER": "{{WORDPRESS_DB_USER|default:wordpress}}",
+				"WORDPRESS_DB_PASSWORD": "{{WORDPRESS_DB_PASSWORD|generate:password:24}}",
+				"WORDPRESS_DB_NAME": "{{WORDPRESS_DB_NAME|default:wordpress}}"
+			}
+		},
+		{
+			"name": "mysql",
+			"image": "mysql:8",
+			"port": 3306,
+			"volumes": [{ "name": "mysql-data", "mountPath": "/var/lib/mysql", "size": "10Gi" }],
+			"environment": {
+				"MYSQL_ROOT_PASSWORD": "{{MYSQL_ROOT_PASSWORD|generate:password:24}}",
+				"MYSQL_USER": "{{WORDPRESS_DB_USER|default:wordpress}}",
+				"MYSQL_PASSWORD": "{{WORDPRESS_DB_PASSWORD|generate:password:24}}",
+				"MYSQL_DATABASE": "{{WORDPRESS_DB_NAME|default:wordpress}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "WORDPRESS_DB_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "wordpress",
+			"required": true
+		},
+		{
+			"key": "WORDPRESS_DB_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "WORDPRESS_DB_NAME",
+			"label": "Database Name",
+			"type": "text",
+			"default": "wordpress",
+			"required": true
+		},
+		{
+			"key": "MYSQL_ROOT_PASSWORD",
+			"label": "MySQL Root Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		}
+	]
+}

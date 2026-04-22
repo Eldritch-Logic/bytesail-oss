@@ -1,0 +1,17 @@
+{
+	"slug": "keydb",
+	"name": "KeyDB",
+	"description": "High-performance fork of Redis with multithreading",
+	"icon": "🔑",
+	"category": "databases",
+	"services": [
+		{
+			"name": "keydb",
+			"image": "eqalpha/keydb:latest",
+			"port": 6379,
+			"volumes": [{ "name": "data", "mountPath": "/data", "size": "2Gi" }],
+			"environment": {}
+		}
+	],
+	"form": []
+}

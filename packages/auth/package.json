@@ -1,0 +1,24 @@
+{
+	"name": "@bytesail/auth",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./client": "./src/client.ts",
+		"./permissions": "./src/permissions.ts"
+	},
+	"scripts": {
+		"build": "tsc",
+		"lint": "biome check .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@bytesail/db": "workspace:*",
+		"better-auth": "^1.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^25.6.0",
+		"typescript": "^5.7.0"
+	}
+}

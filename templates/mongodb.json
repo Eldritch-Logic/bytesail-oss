@@ -1,0 +1,43 @@
+{
+	"slug": "mongodb",
+	"name": "MongoDB",
+	"description": "General purpose document database",
+	"icon": "🍃",
+	"category": "databases",
+	"services": [
+		{
+			"name": "mongodb",
+			"image": "mongo:7",
+			"port": 27017,
+			"volumes": [{ "name": "data", "mountPath": "/data/db", "size": "10Gi" }],
+			"environment": {
+				"MONGO_INITDB_ROOT_USERNAME": "{{MONGO_INITDB_ROOT_USERNAME|default:admin}}",
+				"MONGO_INITDB_ROOT_PASSWORD": "{{MONGO_INITDB_ROOT_PASSWORD|generate:password:24}}",
+				"MONGO_INITDB_DATABASE": "{{MONGO_INITDB_DATABASE|default:app}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "MONGO_INITDB_ROOT_USERNAME",
+			"label": "Root Username",
+			"type": "text",
+			"default": "admin",
+			"required": true
+		},
+		{
+			"key": "MONGO_INITDB_ROOT_PASSWORD",
+			"label": "Root Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "MONGO_INITDB_DATABASE",
+			"label": "Database Name",
+			"type": "text",
+			"default": "app",
+			"required": true
+		}
+	]
+}

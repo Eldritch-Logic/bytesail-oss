@@ -1,0 +1,195 @@
+{
+	"version": 1,
+	"templates": [
+		{
+			"slug": "postgresql",
+			"name": "PostgreSQL",
+			"description": "The world's most advanced open source relational database",
+			"icon": "🐘",
+			"category": "databases",
+			"tags": ["database", "sql", "relational"],
+			"file": "postgresql.json"
+		},
+		{
+			"slug": "mysql",
+			"name": "MySQL",
+			"description": "Popular open source relational database",
+			"icon": "🐬",
+			"category": "databases",
+			"tags": ["database", "sql", "relational"],
+			"file": "mysql.json"
+		},
+		{
+			"slug": "mariadb",
+			"name": "MariaDB",
+			"description": "Community-developed fork of MySQL",
+			"icon": "🦭",
+			"category": "databases",
+			"tags": ["database", "sql", "relational"],
+			"file": "mariadb.json"
+		},
+		{
+			"slug": "mongodb",
+			"name": "MongoDB",
+			"description": "General purpose document database",
+			"icon": "🍃",
+			"category": "databases",
+			"tags": ["database", "nosql", "document"],
+			"file": "mongodb.json"
+		},
+		{
+			"slug": "redis",
+			"name": "Redis",
+			"description": "In-memory data structure store, cache, and message broker",
+			"icon": "🔴",
+			"category": "databases",
+			"tags": ["cache", "database", "nosql"],
+			"file": "redis.json"
+		},
+		{
+			"slug": "keydb",
+			"name": "KeyDB",
+			"description": "High-performance fork of Redis with multithreading",
+			"icon": "🔑",
+			"category": "databases",
+			"tags": ["cache", "database", "nosql"],
+			"file": "keydb.json"
+		},
+		{
+			"slug": "ghost",
+			"name": "Ghost",
+			"description": "Professional publishing platform for blogs and newsletters",
+			"icon": "👻",
+			"category": "cms",
+			"tags": ["cms", "blog", "publishing"],
+			"file": "ghost.json"
+		},
+		{
+			"slug": "wordpress",
+			"name": "WordPress",
+			"description": "The most popular CMS powering 40% of the web",
+			"icon": "📝",
+			"category": "cms",
+			"tags": ["cms", "blog", "website"],
+			"file": "wordpress.json"
+		},
+		{
+			"slug": "strapi",
+			"name": "Strapi",
+			"description": "Leading open source headless CMS",
+			"icon": "🚀",
+			"category": "cms",
+			"tags": ["cms", "headless", "api"],
+			"file": "strapi.json"
+		},
+		{
+			"slug": "directus",
+			"name": "Directus",
+			"description": "Open data platform for managing SQL database content",
+			"icon": "🐰",
+			"category": "cms",
+			"tags": ["cms", "headless", "api", "database"],
+			"file": "directus.json"
+		},
+		{
+			"slug": "plausible",
+			"name": "Plausible",
+			"description": "Privacy-friendly Google Analytics alternative",
+			"icon": "📊",
+			"category": "analytics",
+			"tags": ["analytics", "privacy", "web"],
+			"file": "plausible.json"
+		},
+		{
+			"slug": "umami",
+			"name": "Umami",
+			"description": "Simple, fast, privacy-focused web analytics",
+			"icon": "📈",
+			"category": "analytics",
+			"tags": ["analytics", "privacy", "web"],
+			"file": "umami.json"
+		},
+		{
+			"slug": "posthog",
+			"name": "PostHog",
+			"description": "Product analytics, feature flags, session replay",
+			"icon": "🦔",
+			"category": "analytics",
+			"tags": ["analytics", "product", "feature-flags"],
+			"file": "posthog.json"
+		},
+		{
+			"slug": "gitea",
+			"name": "Gitea",
+			"description": "Lightweight self-hosted Git service",
+			"icon": "☕",
+			"category": "devtools",
+			"tags": ["git", "code", "ci-cd"],
+			"file": "gitea.json"
+		},
+		{
+			"slug": "n8n",
+			"name": "n8n",
+			"description": "Workflow automation tool with 400+ integrations",
+			"icon": "⚡",
+			"category": "devtools",
+			"tags": ["automation", "workflow", "integration"],
+			"file": "n8n.json"
+		},
+		{
+			"slug": "nocodb",
+			"name": "NocoDB",
+			"description": "Open source Airtable alternative",
+			"icon": "📋",
+			"category": "devtools",
+			"tags": ["database", "spreadsheet", "no-code"],
+			"file": "nocodb.json"
+		},
+		{
+			"slug": "minio",
+			"name": "MinIO",
+			"description": "High-performance S3-compatible object storage",
+			"icon": "🪣",
+			"category": "storage",
+			"tags": ["storage", "s3", "object-storage"],
+			"file": "minio.json"
+		},
+		{
+			"slug": "listmonk",
+			"name": "Listmonk",
+			"description": "Self-hosted newsletter and mailing list manager",
+			"icon": "📧",
+			"category": "communication",
+			"tags": ["email", "newsletter", "marketing"],
+			"file": "listmonk.json"
+		},
+		{
+			"slug": "vaultwarden",
+			"name": "Vaultwarden",
+			"description": "Lightweight Bitwarden-compatible password manager",
+			"icon": "🔐",
+			"category": "security",
+			"tags": ["passwords", "security", "encryption"],
+			"file": "vaultwarden.json"
+		},
+		{
+			"slug": "uptime-kuma",
+			"name": "Uptime Kuma",
+			"description": "Self-hosted monitoring tool like Uptime Robot",
+			"icon": "📡",
+			"category": "monitoring",
+			"tags": ["monitoring", "uptime", "alerting"],
+			"file": "uptime-kuma.json"
+		}
+	],
+	"categories": [
+		{ "slug": "databases", "name": "Databases" },
+		{ "slug": "cms", "name": "CMS" },
+		{ "slug": "analytics", "name": "Analytics" },
+		{ "slug": "devtools", "name": "Dev Tools" },
+		{ "slug": "storage", "name": "Storage" },
+		{ "slug": "communication", "name": "Communication" },
+		{ "slug": "security", "name": "Security" },
+		{ "slug": "monitoring", "name": "Monitoring" }
+	]
+}

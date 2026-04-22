@@ -1,0 +1,43 @@
+{
+	"slug": "postgresql",
+	"name": "PostgreSQL",
+	"description": "The world's most advanced open source relational database",
+	"icon": "🐘",
+	"category": "databases",
+	"services": [
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "data", "mountPath": "/var/lib/postgresql/data", "size": "10Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{POSTGRES_USER|default:postgres}}",
+				"POSTGRES_PASSWORD": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{POSTGRES_DB|default:app}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "POSTGRES_USER",
+			"label": "Username",
+			"type": "text",
+			"default": "postgres",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_PASSWORD",
+			"label": "Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_DB",
+			"label": "Database Name",
+			"type": "text",
+			"default": "app",
+			"required": true
+		}
+	]
+}

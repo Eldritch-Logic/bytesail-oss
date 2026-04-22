@@ -1,0 +1,32 @@
+{
+	"name": "@bytesail/cli",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"bin": {
+		"bytesail": "./dist/index.js"
+	},
+	"scripts": {
+		"build": "bun build src/index.ts --compile --outfile=bytesail",
+		"build:cross": "bun build src/index.ts --compile --target=bun-linux-x64 --outfile=dist/bytesail-linux-x64 && bun build src/index.ts --compile --target=bun-linux-arm64 --outfile=dist/bytesail-linux-arm64 && bun build src/index.ts --compile --target=bun-darwin-x64 --outfile=dist/bytesail-darwin-x64 && bun build src/index.ts --compile --target=bun-darwin-arm64 --outfile=dist/bytesail-darwin-arm64 && bun build src/index.ts --compile --target=bun-windows-x64 --outfile=dist/bytesail-windows-x64.exe",
+		"dev": "bun run src/index.ts",
+		"lint": "biome check .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@bytesail/api": "workspace:*",
+		"@trpc/client": "^11.1.0",
+		"chalk": "^5.4.0",
+		"cli-table3": "^0.6.5",
+		"commander": "^13.1.0",
+		"open": "^10.1.0",
+		"ora": "^8.2.0",
+		"superjson": "^2.2.2",
+		"ws": "^8.18.0",
+		"zod": "^3.24.0"
+	},
+	"devDependencies": {
+		"@types/ws": "^8.5.14",
+		"typescript": "^5.7.0"
+	}
+}

@@ -1,0 +1,51 @@
+{
+	"slug": "mysql",
+	"name": "MySQL",
+	"description": "Popular open source relational database",
+	"icon": "🐬",
+	"category": "databases",
+	"services": [
+		{
+			"name": "mysql",
+			"image": "mysql:8",
+			"port": 3306,
+			"volumes": [{ "name": "data", "mountPath": "/var/lib/mysql", "size": "10Gi" }],
+			"environment": {
+				"MYSQL_ROOT_PASSWORD": "{{MYSQL_ROOT_PASSWORD|generate:password:24}}",
+				"MYSQL_USER": "{{MYSQL_USER|default:app}}",
+				"MYSQL_PASSWORD": "{{MYSQL_PASSWORD|generate:password:24}}",
+				"MYSQL_DATABASE": "{{MYSQL_DATABASE|default:app}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "MYSQL_ROOT_PASSWORD",
+			"label": "Root Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "MYSQL_USER",
+			"label": "Username",
+			"type": "text",
+			"default": "app",
+			"required": true
+		},
+		{
+			"key": "MYSQL_PASSWORD",
+			"label": "User Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "MYSQL_DATABASE",
+			"label": "Database Name",
+			"type": "text",
+			"default": "app",
+			"required": true
+		}
+	]
+}

@@ -1,0 +1,78 @@
+{
+	"slug": "plausible",
+	"name": "Plausible",
+	"description": "Privacy-friendly Google Analytics alternative",
+	"icon": "📊",
+	"category": "analytics",
+	"services": [
+		{
+			"name": "plausible",
+			"image": "ghcr.io/plausible/community-edition:v2",
+			"port": 8000,
+			"environment": {
+				"BASE_URL": "{{BASE_URL|default:http://localhost:8000}}",
+				"SECRET_KEY_BASE": "{{SECRET_KEY_BASE|generate:password:24}}",
+				"DATABASE_URL": "postgres://{{POSTGRES_USER|default:plausible}}:{{POSTGRES_PASSWORD|generate:password:24}}@postgresql:5432/{{POSTGRES_DB|default:plausible}}",
+				"CLICKHOUSE_DATABASE_URL": "http://clickhouse:8123/plausible_events"
+			}
+		},
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "pg-data", "mountPath": "/var/lib/postgresql/data", "size": "10Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{POSTGRES_USER|default:plausible}}",
+				"POSTGRES_PASSWORD": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{POSTGRES_DB|default:plausible}}"
+			}
+		},
+		{
+			"name": "clickhouse",
+			"image": "clickhouse/clickhouse-server:24-alpine",
+			"port": 8123,
+			"volumes": [
+				{ "name": "clickhouse-data", "mountPath": "/var/lib/clickhouse", "size": "20Gi" },
+				{ "name": "clickhouse-logs", "mountPath": "/var/log/clickhouse-server", "size": "1Gi" }
+			],
+			"environment": {}
+		}
+	],
+	"form": [
+		{
+			"key": "BASE_URL",
+			"label": "Base URL",
+			"type": "text",
+			"default": "http://localhost:8000",
+			"required": true
+		},
+		{
+			"key": "SECRET_KEY_BASE",
+			"label": "Secret Key Base",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "plausible",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_DB",
+			"label": "Database Name",
+			"type": "text",
+			"default": "plausible",
+			"required": true
+		}
+	]
+}

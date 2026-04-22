@@ -1,0 +1,88 @@
+{
+	"slug": "directus",
+	"name": "Directus",
+	"description": "Open data platform for managing SQL database content",
+	"icon": "🐰",
+	"category": "cms",
+	"services": [
+		{
+			"name": "directus",
+			"image": "directus/directus:11",
+			"port": 8055,
+			"volumes": [
+				{ "name": "uploads", "mountPath": "/directus/uploads", "size": "10Gi" },
+				{ "name": "extensions", "mountPath": "/directus/extensions", "size": "1Gi" }
+			],
+			"environment": {
+				"KEY": "{{DIRECTUS_KEY|generate:password:24}}",
+				"SECRET": "{{DIRECTUS_SECRET|generate:password:24}}",
+				"DB_CLIENT": "pg",
+				"DB_HOST": "postgresql",
+				"DB_PORT": "5432",
+				"DB_DATABASE": "{{DB_DATABASE|default:directus}}",
+				"DB_USER": "{{DB_USER|default:directus}}",
+				"DB_PASSWORD": "{{DB_PASSWORD|generate:password:24}}",
+				"CACHE_ENABLED": "true",
+				"CACHE_STORE": "redis",
+				"REDIS": "redis://redis:6379",
+				"ADMIN_EMAIL": "{{ADMIN_EMAIL|default:admin@example.com}}",
+				"ADMIN_PASSWORD": "{{ADMIN_PASSWORD|generate:password:24}}"
+			}
+		},
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "pg-data", "mountPath": "/var/lib/postgresql/data", "size": "10Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{DB_USER|default:directus}}",
+				"POSTGRES_PASSWORD": "{{DB_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{DB_DATABASE|default:directus}}"
+			}
+		},
+		{
+			"name": "redis",
+			"image": "redis:7-alpine",
+			"port": 6379,
+			"volumes": [{ "name": "redis-data", "mountPath": "/data", "size": "1Gi" }],
+			"environment": {}
+		}
+	],
+	"form": [
+		{
+			"key": "ADMIN_EMAIL",
+			"label": "Admin Email",
+			"type": "text",
+			"default": "admin@example.com",
+			"required": true
+		},
+		{
+			"key": "ADMIN_PASSWORD",
+			"label": "Admin Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "DB_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "directus",
+			"required": true
+		},
+		{
+			"key": "DB_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "DB_DATABASE",
+			"label": "Database Name",
+			"type": "text",
+			"default": "directus",
+			"required": true
+		}
+	]
+}

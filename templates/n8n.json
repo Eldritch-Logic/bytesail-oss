@@ -1,0 +1,54 @@
+{
+	"slug": "n8n",
+	"name": "n8n",
+	"description": "Workflow automation tool with 400+ integrations",
+	"icon": "⚡",
+	"category": "devtools",
+	"services": [
+		{
+			"name": "n8n",
+			"image": "n8nio/n8n:latest",
+			"port": 5678,
+			"volumes": [{ "name": "data", "mountPath": "/home/node/.n8n", "size": "5Gi" }],
+			"environment": {
+				"N8N_BASIC_AUTH_ACTIVE": "true",
+				"N8N_BASIC_AUTH_USER": "{{N8N_BASIC_AUTH_USER|default:admin}}",
+				"N8N_BASIC_AUTH_PASSWORD": "{{N8N_BASIC_AUTH_PASSWORD|generate:password:24}}",
+				"N8N_HOST": "{{N8N_HOST|default:localhost}}",
+				"N8N_PORT": "5678",
+				"N8N_PROTOCOL": "https",
+				"GENERIC_TIMEZONE": "{{GENERIC_TIMEZONE|default:UTC}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "N8N_BASIC_AUTH_USER",
+			"label": "Admin Username",
+			"type": "text",
+			"default": "admin",
+			"required": true
+		},
+		{
+			"key": "N8N_BASIC_AUTH_PASSWORD",
+			"label": "Admin Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "N8N_HOST",
+			"label": "Hostname",
+			"type": "text",
+			"default": "localhost",
+			"required": true
+		},
+		{
+			"key": "GENERIC_TIMEZONE",
+			"label": "Timezone",
+			"type": "text",
+			"default": "UTC",
+			"required": false
+		}
+	]
+}

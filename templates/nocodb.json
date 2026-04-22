@@ -1,0 +1,53 @@
+{
+	"slug": "nocodb",
+	"name": "NocoDB",
+	"description": "Open source Airtable alternative",
+	"icon": "📋",
+	"category": "devtools",
+	"services": [
+		{
+			"name": "nocodb",
+			"image": "nocodb/nocodb:latest",
+			"port": 8080,
+			"volumes": [{ "name": "data", "mountPath": "/usr/app/data", "size": "5Gi" }],
+			"environment": {
+				"NC_DB": "pg://postgresql:5432?u={{POSTGRES_USER|default:nocodb}}&p={{POSTGRES_PASSWORD|generate:password:24}}&d={{POSTGRES_DB|default:nocodb}}",
+				"NC_AUTH_JWT_SECRET": "{{NC_AUTH_JWT_SECRET|generate:password:24}}"
+			}
+		},
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "pg-data", "mountPath": "/var/lib/postgresql/data", "size": "10Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{POSTGRES_USER|default:nocodb}}",
+				"POSTGRES_PASSWORD": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{POSTGRES_DB|default:nocodb}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "POSTGRES_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "nocodb",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_DB",
+			"label": "Database Name",
+			"type": "text",
+			"default": "nocodb",
+			"required": true
+		}
+	]
+}

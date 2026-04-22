@@ -1,0 +1,53 @@
+{
+	"slug": "umami",
+	"name": "Umami",
+	"description": "Simple, fast, privacy-focused web analytics",
+	"icon": "📈",
+	"category": "analytics",
+	"services": [
+		{
+			"name": "umami",
+			"image": "ghcr.io/umami-software/umami:postgresql-latest",
+			"port": 3000,
+			"environment": {
+				"DATABASE_URL": "postgres://{{POSTGRES_USER|default:umami}}:{{POSTGRES_PASSWORD|generate:password:24}}@postgresql:5432/{{POSTGRES_DB|default:umami}}",
+				"DATABASE_TYPE": "postgresql",
+				"APP_SECRET": "{{APP_SECRET|generate:password:24}}"
+			}
+		},
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "pg-data", "mountPath": "/var/lib/postgresql/data", "size": "10Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{POSTGRES_USER|default:umami}}",
+				"POSTGRES_PASSWORD": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{POSTGRES_DB|default:umami}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "POSTGRES_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "umami",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_DB",
+			"label": "Database Name",
+			"type": "text",
+			"default": "umami",
+			"required": true
+		}
+	]
+}

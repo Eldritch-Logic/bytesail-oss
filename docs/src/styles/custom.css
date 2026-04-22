@@ -1,0 +1,7 @@
+:root {
+	--sl-color-accent-low: #0d3b3b;
+	--sl-color-accent: #14b8a6;
+	--sl-color-accent-high: #99f6e4;
+	--sl-font: "Inter", system-ui, sans-serif;
+	--sl-font-mono: "JetBrains Mono", monospace;
+}

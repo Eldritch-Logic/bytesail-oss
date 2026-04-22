@@ -1,0 +1,32 @@
+---
+title: ByteSail
+description: Self-hosted PaaS powered by K3s. Deploy apps, databases, and services on your own infrastructure.
+template: splash
+hero:
+  tagline: A Railway-like deployment experience on your own infrastructure. Deploy from Git, Docker Compose, or templates with zero-config builds.
+  actions:
+    - text: Get Started
+      link: /getting-started/installation/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/Eldritch-Logic/bytesail
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Zero-Config Builds" icon="rocket">
+    Push your code and ByteSail builds it automatically using Railpacks. No Dockerfile required.
+  </Card>
+  <Card title="Docker Compose" icon="document">
+    Import existing Docker Compose stacks and deploy them with a single click.
+  </Card>
+  <Card title="One-Click Templates" icon="puzzle">
+    Deploy popular applications like PostgreSQL, Redis, WordPress, and more from the template gallery.
+  </Card>
+  <Card title="Full Observability" icon="magnifier">
+    Built-in log streaming, metrics, and alerting powered by Loki, Prometheus, and Grafana.
+  </Card>
+</CardGrid>

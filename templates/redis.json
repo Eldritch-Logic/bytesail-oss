@@ -1,0 +1,17 @@
+{
+	"slug": "redis",
+	"name": "Redis",
+	"description": "In-memory data structure store, cache, and message broker",
+	"icon": "🔴",
+	"category": "databases",
+	"services": [
+		{
+			"name": "redis",
+			"image": "redis:7-alpine",
+			"port": 6379,
+			"volumes": [{ "name": "data", "mountPath": "/data", "size": "2Gi" }],
+			"environment": {}
+		}
+	],
+	"form": []
+}

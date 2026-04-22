@@ -1,0 +1,45 @@
+{
+	"slug": "vaultwarden",
+	"name": "Vaultwarden",
+	"description": "Lightweight Bitwarden-compatible password manager",
+	"icon": "🔐",
+	"category": "security",
+	"services": [
+		{
+			"name": "vaultwarden",
+			"image": "vaultwarden/server:latest",
+			"port": 80,
+			"volumes": [{ "name": "data", "mountPath": "/data", "size": "5Gi" }],
+			"environment": {
+				"ADMIN_TOKEN": "{{ADMIN_TOKEN|generate:password:24}}",
+				"DOMAIN": "{{DOMAIN|default:https://vault.example.com}}",
+				"SIGNUPS_ALLOWED": "{{SIGNUPS_ALLOWED|default:true}}",
+				"WEBSOCKET_ENABLED": "true"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "ADMIN_TOKEN",
+			"label": "Admin Token",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "DOMAIN",
+			"label": "Domain URL",
+			"type": "text",
+			"default": "https://vault.example.com",
+			"required": true
+		},
+		{
+			"key": "SIGNUPS_ALLOWED",
+			"label": "Allow Signups",
+			"type": "select",
+			"default": "true",
+			"required": false,
+			"options": ["true", "false"]
+		}
+	]
+}

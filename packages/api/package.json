@@ -1,0 +1,29 @@
+{
+	"name": "@bytesail/api",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/root.ts",
+		"./context": "./src/context.ts"
+	},
+	"scripts": {
+		"build": "tsc",
+		"lint": "biome check .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@bytesail/auth": "workspace:*",
+		"@bytesail/core": "workspace:*",
+		"@bytesail/db": "workspace:*",
+		"@bytesail/shared": "workspace:*",
+		"@trpc/server": "^11.1.0",
+		"drizzle-orm": "^0.44.0",
+		"js-yaml": "^4.1.1",
+		"zod": "^3.24.0"
+	},
+	"devDependencies": {
+		"@types/js-yaml": "^4.0.9",
+		"typescript": "^5.7.0"
+	}
+}

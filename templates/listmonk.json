@@ -1,0 +1,73 @@
+{
+	"slug": "listmonk",
+	"name": "Listmonk",
+	"description": "Self-hosted newsletter and mailing list manager",
+	"icon": "📧",
+	"category": "communication",
+	"services": [
+		{
+			"name": "listmonk",
+			"image": "listmonk/listmonk:latest",
+			"port": 9000,
+			"environment": {
+				"LISTMONK_app__address": "0.0.0.0:9000",
+				"LISTMONK_app__admin_username": "{{LISTMONK_ADMIN_USER|default:admin}}",
+				"LISTMONK_app__admin_password": "{{LISTMONK_ADMIN_PASSWORD|generate:password:24}}",
+				"LISTMONK_db__host": "postgresql",
+				"LISTMONK_db__port": "5432",
+				"LISTMONK_db__user": "{{POSTGRES_USER|default:listmonk}}",
+				"LISTMONK_db__password": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"LISTMONK_db__database": "{{POSTGRES_DB|default:listmonk}}",
+				"LISTMONK_db__ssl_mode": "disable"
+			}
+		},
+		{
+			"name": "postgresql",
+			"image": "postgres:16-alpine",
+			"port": 5432,
+			"volumes": [{ "name": "pg-data", "mountPath": "/var/lib/postgresql/data", "size": "10Gi" }],
+			"environment": {
+				"POSTGRES_USER": "{{POSTGRES_USER|default:listmonk}}",
+				"POSTGRES_PASSWORD": "{{POSTGRES_PASSWORD|generate:password:24}}",
+				"POSTGRES_DB": "{{POSTGRES_DB|default:listmonk}}"
+			}
+		}
+	],
+	"form": [
+		{
+			"key": "LISTMONK_ADMIN_USER",
+			"label": "Admin Username",
+			"type": "text",
+			"default": "admin",
+			"required": true
+		},
+		{
+			"key": "LISTMONK_ADMIN_PASSWORD",
+			"label": "Admin Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_USER",
+			"label": "Database Username",
+			"type": "text",
+			"default": "listmonk",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_PASSWORD",
+			"label": "Database Password",
+			"type": "password",
+			"default": "",
+			"required": true
+		},
+		{
+			"key": "POSTGRES_DB",
+			"label": "Database Name",
+			"type": "text",
+			"default": "listmonk",
+			"required": true
+		}
+	]
+}

@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bytesail
+  namespace: bytesail-system
+  labels:
+    app: bytesail
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bytesail
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: bytesail
+    spec:
+      initContainers:
+        - name: migrate
+          image: ghcr.io/eldritch-logic/bytesail:latest
+          command: ["npx", "drizzle-kit", "migrate"]
+          envFrom:
+            - secretRef:
+                name: bytesail-env
+      containers:
+        - name: bytesail
+          image: ghcr.io/eldritch-logic/bytesail:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: bytesail-env
+          startupProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 3000
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 3000
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bytesail-env
+  namespace: bytesail-system
+type: Opaque
+stringData:
+  DATABASE_URL: postgresql://bytesail:bytesail-secret@postgres.bytesail-system:5432/bytesail
+  BETTER_AUTH_SECRET: change-me-to-a-random-64-char-string
+  ENCRYPTION_KEY: change-me-to-a-32-char-string!!
+  BYTESAIL_VERSION: latest
+  REGISTRY_URL: registry.bytesail-system.svc.cluster.local:5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bytesail
+  namespace: bytesail-system
+  labels:
+    app: bytesail
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: bytesail
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bytesail
+  namespace: bytesail-system
+  labels:
+    app: bytesail
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bytesail
+                port:
+                  number: 80

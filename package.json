@@ -1,0 +1,31 @@
+{
+	"name": "bytesail",
+	"private": true,
+	"description": "Self-hosted PaaS platform powered by K3s",
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"lint": "turbo lint",
+		"typecheck": "turbo typecheck",
+		"test": "turbo test",
+		"prepare": "husky"
+	},
+	"packageManager": "pnpm@10.8.0",
+	"engines": {
+		"node": ">=20"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.12",
+		"@changesets/cli": "^2.30.0",
+		"@playwright/test": "^1.59.1",
+		"@testcontainers/postgresql": "^11.14.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.4.0",
+		"testcontainers": "^11.14.0",
+		"turbo": "^2.9.6",
+		"vitest": "^4.1.4"
+	},
+	"lint-staged": {
+		"*.{js,ts,jsx,tsx,svelte,json}": "biome check --write"
+	}
+}

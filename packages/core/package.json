@@ -1,0 +1,48 @@
+{
+	"name": "@bytesail/core",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		"./build/railpacks": "./src/build/railpacks.ts",
+		"./k3s/client": "./src/k3s/client.ts",
+		"./k3s/deployments": "./src/k3s/deployments.ts",
+		"./k3s/ingress": "./src/k3s/ingress.ts",
+		"./k3s/namespaces": "./src/k3s/namespaces.ts",
+		"./k3s/services": "./src/k3s/services.ts",
+		"./k3s/status": "./src/k3s/status.ts",
+		"./monitoring/logs": "./src/monitoring/logs.ts",
+		"./monitoring/metrics": "./src/monitoring/metrics.ts",
+		"./notifications/slack": "./src/notifications/slack.ts",
+		"./notifications/discord": "./src/notifications/discord.ts",
+		"./notifications/email": "./src/notifications/email.ts",
+		"./notifications/telegram": "./src/notifications/telegram.ts",
+		"./notifications/webhook": "./src/notifications/webhook.ts",
+		"./deploy/pipeline": "./src/deploy/pipeline.ts",
+		"./git/webhook": "./src/git/webhook.ts",
+		"./update/checker": "./src/update/checker.ts",
+		"./update/pipeline": "./src/update/pipeline.ts",
+		"./utils/*": "./src/utils/*.ts"
+	},
+	"scripts": {
+		"build": "tsc",
+		"lint": "biome check .",
+		"typecheck": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@bytesail/db": "workspace:*",
+		"@bytesail/shared": "workspace:*",
+		"@kubernetes/client-node": "^1.2.0",
+		"@octokit/app": "^16.1.2",
+		"drizzle-orm": "^0.44.0",
+		"js-yaml": "^4.1.1",
+		"nodemailer": "^8.0.5",
+		"semver": "^7.7.4"
+	},
+	"devDependencies": {
+		"@types/js-yaml": "^4.0.9",
+		"@types/nodemailer": "^8.0.0",
+		"@types/semver": "^7.7.1",
+		"typescript": "^5.7.0"
+	}
+}

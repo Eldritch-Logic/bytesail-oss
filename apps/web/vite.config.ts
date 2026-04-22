@@ -8,4 +8,7 @@ dotenv.config({ path: "../../.env" });
 
 export default defineConfig({
 	plugins: [tailwindcss(), webSocketPlugin(), sveltekit()],
+	ssr: {
+		noExternal: [/^@bytesail\//],
+	},
 });

@@ -13,16 +13,16 @@ A self-hosted Platform-as-a-Service (PaaS) that gives you a Railway/Heroku-like 
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | SvelteKit 2, shadcn-svelte, Tailwind CSS 4 |
-| API | tRPC v11, WebSocket |
-| Auth | Better Auth |
-| Database | PostgreSQL 16, Drizzle ORM |
-| Orchestration | K3s, Traefik, Longhorn |
-| Image Building | Railpacks (BuildKit-native) |
-| CLI | TypeScript + Commander.js, compiled with Bun |
-| Observability | Grafana Loki, Prometheus, Alloy, Grafana |
+| Layer          | Technology                                   |
+| -------------- | -------------------------------------------- |
+| Frontend       | SvelteKit 2, shadcn-svelte, Tailwind CSS 4   |
+| API            | tRPC v11, WebSocket                          |
+| Auth           | Better Auth                                  |
+| Database       | PostgreSQL 16, Drizzle ORM                   |
+| Orchestration  | K3s, Traefik, Longhorn                       |
+| Image Building | Railpacks (BuildKit-native)                  |
+| CLI            | TypeScript + Commander.js, compiled with Bun |
+| Observability  | Grafana Loki, Prometheus, Alloy, Grafana     |
 
 ## Project Structure
 
@@ -62,18 +62,18 @@ This guide gets you from zero to a fully working ByteSail development environmen
 
 ### Prerequisites
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| [Node.js](https://nodejs.org/) | >= 20 | Runtime |
-| [pnpm](https://pnpm.io/) | >= 10 | Package manager |
-| [PostgreSQL](https://www.postgresql.org/) | 16 | Metadata database |
-| [Docker](https://www.docker.com/) | Latest | Container runtime (for K3s, tests) |
-| [Bun](https://bun.sh/) | Latest | CLI compilation (optional) |
+| Tool                                      | Version | Purpose                            |
+| ----------------------------------------- | ------- | ---------------------------------- |
+| [Node.js](https://nodejs.org/)            | >= 20   | Runtime                            |
+| [pnpm](https://pnpm.io/)                  | >= 10   | Package manager                    |
+| [PostgreSQL](https://www.postgresql.org/) | 16      | Metadata database                  |
+| [Docker](https://www.docker.com/)         | Latest  | Container runtime (for K3s, tests) |
+| [Bun](https://bun.sh/)                    | Latest  | CLI compilation (optional)         |
 
 ### Step 1: Clone and Install
 
 ```bash
-git clone https://github.com/Eldritch-Logic/bytesail.git
+git clone https://github.com/Eldritch-Logic/bytesail-oss.git
 cd bytesail
 pnpm install
 ```
@@ -132,16 +132,16 @@ DASHBOARD_URL=http://localhost:5173
 BYTESAIL_VERSION=dev
 ```
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `DATABASE_URL` | Yes | PostgreSQL connection string |
-| `BETTER_AUTH_SECRET` | Yes | 64-char random string for session signing |
-| `ENCRYPTION_KEY` | Yes | Exactly 32 characters for AES-256-GCM encryption |
-| `BETTER_AUTH_URL` | Yes | Base URL for auth callbacks |
-| `GITHUB_CLIENT_ID` | No | GitHub OAuth app client ID |
-| `GITHUB_CLIENT_SECRET` | No | GitHub OAuth app client secret |
-| `DASHBOARD_URL` | No | Used for CORS trusted origins |
-| `BYTESAIL_VERSION` | No | Set automatically in production |
+| Variable               | Required | Description                                      |
+| ---------------------- | -------- | ------------------------------------------------ |
+| `DATABASE_URL`         | Yes      | PostgreSQL connection string                     |
+| `BETTER_AUTH_SECRET`   | Yes      | 64-char random string for session signing        |
+| `ENCRYPTION_KEY`       | Yes      | Exactly 32 characters for AES-256-GCM encryption |
+| `BETTER_AUTH_URL`      | Yes      | Base URL for auth callbacks                      |
+| `GITHUB_CLIENT_ID`     | No       | GitHub OAuth app client ID                       |
+| `GITHUB_CLIENT_SECRET` | No       | GitHub OAuth app client secret                   |
+| `DASHBOARD_URL`        | No       | Used for CORS trusted origins                    |
+| `BYTESAIL_VERSION`     | No       | Set automatically in production                  |
 
 ### Step 4: Push Database Schema
 
@@ -182,6 +182,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server \
 ```
 
 **Important flags:**
+
 - `--cluster-cidr=10.0.0.0/8` — large pod CIDR so each project namespace has plenty of IPs
 - `--service-cidr=10.255.0.0/16` — service IP range
 - `--cluster-dns=10.255.0.10` — DNS for in-cluster resolution
@@ -315,6 +316,7 @@ kubectl apply -f deploy/k3s/cert-manager/cluster-issuer.yaml
 For testing domain routing without real DNS:
 
 1. Add entries to `/etc/hosts`:
+
    ```
    127.0.0.1  myapp.bytesail.local
    127.0.0.1  api.bytesail.local
